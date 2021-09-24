@@ -18,7 +18,7 @@ float PedirFloat (char mensaje[]){
 	return numIngresado;
 }
 
-int VerificarFloat (char numero[]){
+int VerificarNumero (char numero[]){
 
 	int i;
 	int retorno;
@@ -27,11 +27,13 @@ int VerificarFloat (char numero[]){
 
 	for(i=0; i<strlen(numero);i++)
 	{
-		if(!(isdigit(numero[i])))
-		{
+		if(numero[i]!='.'){
+			if(!(isdigit(numero[i])))
+			{
 
 
-			retorno=0;
+				retorno=0;
+			}
 		}
 	}
 	return retorno;
@@ -49,7 +51,7 @@ int PedirInt (char mensaje[]){
 
 void MostrarResultado (char mensaje[],float numeroUno, float numeroDos, float resultado){
 
-	printf("\nEl resultado de %.2f %s %.2f es: %.4f",numeroUno,mensaje,numeroDos,resultado);
+	printf("\n El resultado de %.2f %s %.2f es: %.4f",numeroUno,mensaje,numeroDos,resultado);
 
 }
 
@@ -60,7 +62,7 @@ void MostrarCalculos (char mensaje[],float numeroUno,char mensajeSigno[],float n
 
 void MostrarFactorial (char mensaje[],float numeroUno,int factorial){
 
-	printf("\n%s %.2f es: %d",mensaje,numeroUno,factorial);
+	printf("\n%s %.0f es: %d \n",mensaje,numeroUno,factorial);
 }
 
 char PedirChar (char mensaje[]){
@@ -82,18 +84,16 @@ void ValidarNumero (char mensaje[], char numero[])
 	do{
 		printf("\n %s", mensaje);
 		scanf("%s", numero);
-		valiarNumero=VerificarFloat(numero);
+		valiarNumero=VerificarNumero(numero);
 
 		if(valiarNumero==0)
 		{
-			printf("\n No es un numero.\n");
+			printf("\n\n Error! El dato ingresado no es un numero.\n");
 		}
 
 	 }while(valiarNumero==0);
 
 }
-
-
 
 
 

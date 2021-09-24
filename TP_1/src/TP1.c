@@ -14,7 +14,7 @@
 #include "Math_TP.h"
 #include <ctype.h>
 
-#define TAM 34
+#define TAM 31
 
 int main(void) {
 
@@ -23,7 +23,6 @@ int main(void) {
 	char opciones;
 	char numeroUno[1000000];
 	char numeroDos[1000000];
-	//int valiarNumeroUno;
 	float numeroUnoValidado;
 	float nuemroDosValidado;
 	float suma;
@@ -33,6 +32,11 @@ int main(void) {
 	int factorNumeroUno;
 	int factorNumeroDos;
 	int verificaDivicion;
+	char opcionAntes;
+	char opcionAntesDos;
+	int castFactorUno;
+	int castFactorDos;
+
 
 
 
@@ -43,13 +47,17 @@ int main(void) {
 		printf("\t\tIngrese 2 para ingresar el 2do operador: %.2f\n",nuemroDosValidado);
 		printf("\t\tIngrese 3 para calcular todas las operaciones\n");
 		printf("\t\tIngrese 4 para ver todos los resultados\n");
-		printf("============================================================================\n");
+		printf("\t\tIngrese 5 para salir de la caluladora\n");
+		printf("============================================================================\n\n");
 
-		opciones=PedirChar("Elija una opción de 1-4: ");
+		opciones=PedirChar("Elija una opcion de 1-4: ");
+
+
 
 		switch (opciones)
 		{
 			case '1':
+				opcionAntes=opciones;
 
 				ValidarNumero("Ingrese el 1er operador: ",numeroUno);
 
@@ -57,6 +65,7 @@ int main(void) {
 
 			break;
 			case '2':
+				opcionAntesDos=opciones;
 
 				ValidarNumero("Ingrese el 2do operador: ",numeroDos);
 
@@ -65,8 +74,14 @@ int main(void) {
 			break;
 			case '3':
 
-					printf("\nCalculando...... \n");
 
+				printf("\nCalculando...... \n");
+
+				if(opcionAntes=='1' && opcionAntesDos=='2')
+				{
+					opcionAntes=opciones;
+					castFactorUno=(int)numeroUnoValidado;
+					castFactorDos=(int)nuemroDosValidado;
 					suma=Suma(numeroUnoValidado,nuemroDosValidado);
 					resta=Resta(numeroUnoValidado,nuemroDosValidado);
 					verificaDivicion=Divicion(numeroUnoValidado,nuemroDosValidado,&divicionResultado);
@@ -78,55 +93,66 @@ int main(void) {
 					MostrarCalculos("Calcular la resta ",numeroUnoValidado,"-",nuemroDosValidado);
 					MostrarCalculos("Calcular la división ",numeroUnoValidado,"/",nuemroDosValidado);
 					MostrarCalculos("Calcular la multiplicación ",numeroUnoValidado,"*",nuemroDosValidado);
-					printf("\n Calcular el Factor de %.2f!",numeroUnoValidado);
-					printf("\n Calcular el Factor de %.2f!",nuemroDosValidado);
-
+					printf("\n Calcular el Factor de %d!",castFactorUno);
+					printf("\n Calcular el Factor de %d!",castFactorDos);
 					printf("\n\nTerminado!\n");
+				}
+				else
+				{
+					printf("\nNo se ingresaron suficientes numeros. Asegurese de ingresar los Dos operadores.\n");
+				}
 
 			break;
 			case '4':
 
-				MostrarResultado("+",numeroUnoValidado,nuemroDosValidado,suma);
-				MostrarResultado("-",numeroUnoValidado,nuemroDosValidado,resta);
-				MostrarResultado("*",numeroUnoValidado,nuemroDosValidado,multiplicacion);
-				if(verificaDivicion==0)
+				if(opcionAntes=='3')
 				{
-					MostrarResultado("/",numeroUnoValidado,nuemroDosValidado,divicionResultado);
+					MostrarResultado("+",numeroUnoValidado,nuemroDosValidado,suma);
+					MostrarResultado("-",numeroUnoValidado,nuemroDosValidado,resta);
+					MostrarResultado("*",numeroUnoValidado,nuemroDosValidado,multiplicacion);
+					if(verificaDivicion==0)
+					{
+						MostrarResultado("/",numeroUnoValidado,nuemroDosValidado,divicionResultado);
 
+					}
+					else
+					{
+						printf("\n El divisor no pude ser 0");
+
+					}
+					if(Factorial(numeroUnoValidado,&factorNumeroUno,TAM)==0) // validar que nosea negativo ni decimal
+					{
+						numeroUnoValidado=(int)numeroUnoValidado;
+						MostrarFactorial("\n El factorial de :",numeroUnoValidado,factorNumeroUno);
+					}
+					else
+					{
+						printf("\n\n El numero %.2f es un 0, negativo o muy grande para factoriar, no debe ser mayor a: %d \n",numeroUnoValidado,TAM);
+					}
+					if( Factorial(nuemroDosValidado,&factorNumeroDos,TAM)==0)
+					{
+						nuemroDosValidado=(int)nuemroDosValidado;
+						MostrarFactorial(" El factorial de :",nuemroDosValidado,factorNumeroDos);
+					}
+					else
+					{
+						printf("\n\nEl numero %.2f es un 0, negativo o muy grande para factoriar, no debe ser mayor a: %d \n",nuemroDosValidado ,TAM);
+					}
 				}
 				else
 				{
-					printf("\nEl divisor no pude ser 0");
-
-				}
-				if(Factorial(numeroUnoValidado,&factorNumeroUno,TAM)==0) // validar que nosea negativo ni decimal
-				{
-					MostrarFactorial("El factorial de :",numeroUnoValidado,factorNumeroUno);
-				}
-				else
-				{
-					printf("\nEl numero %.2f es negativo o muy grande para factoriar, no de ser mayor a: %d",numeroUnoValidado,TAM);
-				}
-				if( Factorial(nuemroDosValidado,&factorNumeroDos,TAM)==0)
-				{
-					MostrarFactorial("El factorial de :",nuemroDosValidado,factorNumeroDos);
-				}
-				else
-				{
-					printf("\nEl numero %.2f es negativo o muy grande para factoriar, no de ser mayor a: %d",nuemroDosValidado ,TAM);
+					printf("\n\t\tNo se realizo ningun calculo aun. Precione opcion 3 en el menu por favor.\n");
 				}
 
-
+			break;
+			case '5':
+				printf("\n\n\n\t\tGracias vuelva prontos...\n\n");
 			break;
 			default:
-				printf("\n ERROR! Debe ser un numero de 1-4 no se aceptan ni letras ni simbolos.\n");
+				printf("\n\n ERROR! Debe ser un numero de 1-5 no se aceptan ni letras ni simbolos.\n");
 			break;
 		}
-	}while(opciones!='4');
-
-
-
-	printf("\n\n\n\t\tGracias vuelva prontos...\n\n");
+	}while(opciones!='5');
 
 
 

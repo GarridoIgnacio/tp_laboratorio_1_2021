@@ -67,15 +67,16 @@ float Factorial (float numero,int* factorNumero, int limite){
 	resultado=1;
 	retorno=0;
 
-	if(numero<0 || numero>limite)
+
+	if((numero<0 || numero>limite) || numero==0)
 	{
 		retorno=-1;
 		return retorno;
 	}
 
-		for(i=numero;i>0;i--)
+		for(i=(int)numero;i>0;i--)
 		{
-			resultado= resultado*i;
+			resultado= resultado * i;
 
 		}
 		*factorNumero=resultado;
@@ -83,7 +84,7 @@ float Factorial (float numero,int* factorNumero, int limite){
 	return 	retorno;
 }
 
-int DetermninarSigno (int numero){
+/*int DetermninarSigno (int numero){
 
 	int retorno;
 
@@ -96,7 +97,7 @@ int DetermninarSigno (int numero){
 
 	return retorno;
 
-}
+}*/
 
 
 
