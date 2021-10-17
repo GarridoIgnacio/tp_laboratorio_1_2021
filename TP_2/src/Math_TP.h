@@ -52,6 +52,8 @@ float Multiplicacion (float, float);
 /// @return retorna un int : -1 cuando el numero a facorial es negativo mayor al limite o es igual a 0
 float Factorial (float, int*, int);
 
+float Promedio (float resSuma, float divisor);
+
 //int DetermninarSigno (int);
 
 

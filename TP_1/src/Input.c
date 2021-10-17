@@ -27,7 +27,7 @@ int VerificarNumero (char numero[]){
 
 	for(i=0; i<strlen(numero);i++)
 	{
-		if(numero[i]!='.'){
+		if(numero[i]!='.' && numero[i]!='-'){
 			if(!(isdigit(numero[i])))
 			{
 

@@ -84,6 +84,15 @@ float Factorial (float numero,int* factorNumero, int limite){
 	return 	retorno;
 }
 
+float Promedio (float resSuma, float divisor)
+{
+	float resultado;
+
+	resultado=resSuma/divisor;
+
+	return resultado;
+}
+
 /*int DetermninarSigno (int numero){
 
 	int retorno;
