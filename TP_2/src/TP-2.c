@@ -22,6 +22,8 @@
 
 int main(void) {
 
+	setbuf(stdout, NULL);
+
 	eEmployee listaEmpleados[TamLista]= {{100,"Carlos","Sabala",2500.45,2,Vacio},
 										 {101,"Jose","Garcia",2500.45,3,Vacio},
 										 {102,"Armando","Barreda",1500.45,1,Vacio},
